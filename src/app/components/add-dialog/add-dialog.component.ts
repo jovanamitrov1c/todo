@@ -1,6 +1,7 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Subject, takeUntil } from 'rxjs';
 import { Todo } from 'src/app/models/todo.model';
 import { getId } from 'src/app/util/id-generator';
 
@@ -9,9 +10,12 @@ import { getId } from 'src/app/util/id-generator';
   templateUrl: './add-dialog.component.html',
   styleUrls: ['./add-dialog.component.scss'],
 })
-export class AddDialogComponent {
+export class AddDialogComponent implements OnInit, OnDestroy {
   todoForm: FormGroup;
   currentTodo: Todo;
+  editMode: boolean;
+
+  private _destroy$ = new Subject<void>();
 
   constructor(
     @Inject(MAT_DIALOG_DATA) { todo, isEdit }: any,
@@ -21,7 +25,17 @@ export class AddDialogComponent {
       title: new FormControl(''),
       description: new FormControl(''),
     });
+    this.editMode = isEdit;
     isEdit ? this.populateFields(todo) : this.initTodo();
+  }
+
+  ngOnInit(): void {
+    this.updateValue();
+  }
+
+  ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
   }
 
   close() {
@@ -29,11 +43,15 @@ export class AddDialogComponent {
   }
 
   save() {
-    const todo = {
-      ...this.currentTodo,
-      ...this.todoForm.getRawValue(),
-    };
-    this.todoForm.valid && this.dialogRef.close(todo);
+    this.todoForm.valid && this.dialogRef.close(this.currentTodo);
+  }
+
+  private updateValue() {
+    this.todoForm.valueChanges
+      .pipe(takeUntil(this._destroy$))
+      .subscribe(
+        (values) => (this.currentTodo = { ...this.currentTodo, ...values })
+      );
   }
 
   private initTodo(): void {

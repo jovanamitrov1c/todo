@@ -6,6 +6,7 @@ import { AddDialogComponent } from 'src/app/components/add-dialog/add-dialog.com
 import { Todo } from 'src/app/models/todo.model';
 import { AddTodo } from 'src/app/store/todo.actions';
 import { TodoState } from 'src/app/store/todo.state';
+import { getDialogConfig } from 'src/app/util/dialog-config';
 
 @Component({
   selector: 'app-todo-page',
@@ -20,9 +21,7 @@ export class TodoPageComponent implements OnDestroy {
   constructor(
     private readonly dialog: MatDialog,
     private readonly store: Store
-  ) {
-    this.todos$.subscribe(console.log);
-  }
+  ) {}
 
   ngOnDestroy(): void {
     this._destroy$.next();
@@ -30,12 +29,11 @@ export class TodoPageComponent implements OnDestroy {
   }
 
   openModal() {
-    const dialogRef = this.dialog.open(AddDialogComponent, {
-      minWidth: 400,
-      minHeight: 200,
-      autoFocus: false,
-      data: { isEdit: false },
-    });
+    const data = { isEdit: false };
+    const dialogRef = this.dialog.open(
+      AddDialogComponent,
+      getDialogConfig(data)
+    );
 
     dialogRef
       .afterClosed()

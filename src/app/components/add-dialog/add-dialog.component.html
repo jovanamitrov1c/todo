@@ -1,6 +1,6 @@
 <form [formGroup]="todoForm">
   <div class="d-flex justify-content-between px-2">
-    <h2 class="p-3 m-0">Add new todo</h2>
+    <h2 class="p-3 m-0">{{ editMode ? currentTodo.title : "Add new todo" }}</h2>
     <button mat-icon-button (click)="close()">
       <mat-icon>close</mat-icon>
     </button>

@@ -5,6 +5,7 @@ import { Todo } from 'src/app/models/todo.model';
 import { DeleteTodo, ToggleDone, UpdateTodo } from 'src/app/store/todo.actions';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 import { Subject, filter, takeUntil } from 'rxjs';
+import { getDialogConfig } from 'src/app/util/dialog-config';
 
 @Component({
   selector: 'app-todo-item',
@@ -31,15 +32,14 @@ export class TodoItemComponent implements OnDestroy {
   }
 
   edit(todo: Todo) {
-    const dialogRef = this.dialog.open(AddDialogComponent, {
-      minWidth: 400,
-      minHeight: 200,
-      autoFocus: false,
-      data: {
-        todo,
-        isEdit: true,
-      },
-    });
+    const data = {
+      todo,
+      isEdit: true,
+    };
+    const dialogRef = this.dialog.open(
+      AddDialogComponent,
+      getDialogConfig(data)
+    );
 
     dialogRef
       .afterClosed()
