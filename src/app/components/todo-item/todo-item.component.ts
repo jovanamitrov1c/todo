@@ -1,20 +1,53 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngxs/store';
 import { Todo } from 'src/app/models/todo.model';
-import { DeleteTodo, ToggleDone } from 'src/app/store/todo.actions';
+import { DeleteTodo, ToggleDone, UpdateTodo } from 'src/app/store/todo.actions';
+import { AddDialogComponent } from '../add-dialog/add-dialog.component';
+import { Subject, filter, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-todo-item',
   templateUrl: './todo-item.component.html',
   styleUrls: ['./todo-item.component.scss'],
 })
-export class TodoItemComponent {
+export class TodoItemComponent implements OnDestroy {
   @Input() todo: Todo;
 
-  constructor(private readonly store: Store) {}
+  private _destroy$ = new Subject<void>();
+
+  constructor(
+    private readonly store: Store,
+    private readonly dialog: MatDialog
+  ) {}
+
+  ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
+  }
 
   delete(id: string) {
     this.store.dispatch(new DeleteTodo(id));
+  }
+
+  edit(todo: Todo) {
+    const dialogRef = this.dialog.open(AddDialogComponent, {
+      minWidth: 400,
+      minHeight: 200,
+      autoFocus: false,
+      data: {
+        todo,
+        isEdit: true,
+      },
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(
+        takeUntil(this._destroy$),
+        filter((result) => !!result)
+      )
+      .subscribe((todo) => this.store.dispatch(new UpdateTodo(todo)));
   }
 
   toggleDone(id: string) {

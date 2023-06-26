@@ -1,9 +1,7 @@
-import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
-import { Store } from '@ngxs/store';
+import { Component, Inject } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Todo } from 'src/app/models/todo.model';
-import { AddTodo } from 'src/app/store/todo.actions';
 import { getId } from 'src/app/util/id-generator';
 
 @Component({
@@ -12,15 +10,18 @@ import { getId } from 'src/app/util/id-generator';
   styleUrls: ['./add-dialog.component.scss'],
 })
 export class AddDialogComponent {
-  todoTitleFormControl: FormControl;
-  todoDescriptionFormControl: FormControl;
+  todoForm: FormGroup;
+  currentTodo: Todo;
 
   constructor(
-    private readonly dialogRef: MatDialogRef<AddDialogComponent>,
-    private readonly store: Store
+    @Inject(MAT_DIALOG_DATA) { todo, isEdit }: any,
+    private readonly dialogRef: MatDialogRef<AddDialogComponent>
   ) {
-    this.todoTitleFormControl = new FormControl();
-    this.todoDescriptionFormControl = new FormControl();
+    this.todoForm = new FormGroup({
+      title: new FormControl(''),
+      description: new FormControl(''),
+    });
+    isEdit ? this.populateFields(todo) : this.initTodo();
   }
 
   close() {
@@ -28,13 +29,26 @@ export class AddDialogComponent {
   }
 
   save() {
-    const todo: Todo = {
+    const todo = {
+      ...this.currentTodo,
+      ...this.todoForm.getRawValue(),
+    };
+    this.todoForm.valid && this.dialogRef.close(todo);
+  }
+
+  private initTodo(): void {
+    this.currentTodo = {
       id: getId(),
-      title: this.todoTitleFormControl.getRawValue(),
-      description: this.todoDescriptionFormControl.getRawValue(),
+      title: '',
       isDone: false,
     };
-    this.store.dispatch(new AddTodo(todo));
-    this.dialogRef.close();
+  }
+
+  private populateFields(todo: Todo) {
+    this.currentTodo = todo;
+    this.todoForm.patchValue({
+      title: todo.title,
+      description: todo.description,
+    });
   }
 }

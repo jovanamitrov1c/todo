@@ -1,6 +1,6 @@
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { Todo } from '../models/todo.model';
-import { AddTodo, DeleteTodo, ToggleDone } from './todo.actions';
+import { AddTodo, DeleteTodo, ToggleDone, UpdateTodo } from './todo.actions';
 import { Injectable } from '@angular/core';
 
 interface TodoStateModel {
@@ -24,6 +24,17 @@ export class TodoState {
   ) {
     const { currentTodos } = getState();
     patchState({ currentTodos: [...currentTodos, todo] });
+  }
+
+  @Action(UpdateTodo)
+  public updateTodo(
+    { patchState, getState }: StateContext<TodoStateModel>,
+    { todo }: UpdateTodo
+  ) {
+    const { currentTodos } = getState();
+    const updatedTodos = currentTodos.filter((_todo) => _todo.id !== todo.id);
+    updatedTodos.push(todo);
+    patchState({ currentTodos: updatedTodos });
   }
 
   @Action(DeleteTodo)

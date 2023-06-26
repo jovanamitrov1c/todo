@@ -12,6 +12,12 @@ export class DeleteTodo {
   constructor(public id: string) {}
 }
 
+export class UpdateTodo {
+  static readonly type = '[Todo] Update';
+
+  constructor(public todo: Todo) {}
+}
+
 export class ToggleDone {
   static readonly type = '[Todo] Toggle done';
 
