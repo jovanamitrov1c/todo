@@ -13,12 +13,14 @@ import { getId } from 'src/app/util/id-generator';
 })
 export class AddDialogComponent {
   todoTitleFormControl: FormControl;
+  todoDescriptionFormControl: FormControl;
 
   constructor(
     private readonly dialogRef: MatDialogRef<AddDialogComponent>,
     private readonly store: Store
   ) {
     this.todoTitleFormControl = new FormControl();
+    this.todoDescriptionFormControl = new FormControl();
   }
 
   close() {
@@ -29,6 +31,7 @@ export class AddDialogComponent {
     const todo: Todo = {
       id: getId(),
       title: this.todoTitleFormControl.getRawValue(),
+      description: this.todoDescriptionFormControl.getRawValue(),
       isDone: false,
     };
     this.store.dispatch(new AddTodo(todo));
