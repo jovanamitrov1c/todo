@@ -1,1 +1,7 @@
-<p>todo-page works!</p>
+<div class="container">
+  <app-todo-list [todos$]="todos$"></app-todo-list>
+  <button mat-flat-button color="primary" (click)="openModal()">
+    <span>Add new</span>
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

@@ -1,0 +1,6 @@
+<h1>All todos</h1>
+<ng-container *ngIf="todos$ | async as todos">
+  <div class="pb-3" *ngFor="let todo of todos">
+    <app-todo-item [todo]="todo"></app-todo-item>
+  </div>
+</ng-container>

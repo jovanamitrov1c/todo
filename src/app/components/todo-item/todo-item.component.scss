@@ -1,0 +1,8 @@
+.todo-title {
+  font-size: 1.2rem;
+
+  &.todo-done {
+    color: #9a9a9a;
+    text-decoration: line-through;
+  }
+}
