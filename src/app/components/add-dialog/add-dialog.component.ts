@@ -1,5 +1,5 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Subject, takeUntil } from 'rxjs';
 import { Todo } from 'src/app/models/todo.model';
@@ -22,8 +22,8 @@ export class AddDialogComponent implements OnInit, OnDestroy {
     private readonly dialogRef: MatDialogRef<AddDialogComponent>
   ) {
     this.todoForm = new FormGroup({
-      title: new FormControl(''),
-      description: new FormControl(''),
+      title: new FormControl('', Validators.maxLength(50)),
+      description: new FormControl('', Validators.maxLength(200)),
     });
     this.editMode = isEdit;
     isEdit ? this.populateFields(todo) : this.initTodo();

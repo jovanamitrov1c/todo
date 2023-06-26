@@ -1,3 +1,7 @@
-textarea {
-  resize: none;
+.description-field {
+  min-height: 220px;
+
+  textarea {
+    resize: none;
+  }
 }
