@@ -59,6 +59,7 @@ export class AddDialogComponent implements OnInit, OnDestroy {
       id: getId(),
       title: '',
       isDone: false,
+      tags: [],
     };
   }
 
