@@ -15,9 +15,12 @@ import { AddDialogComponent } from './components/add-dialog/add-dialog.component
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatChipsModule } from '@angular/material/chips';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxsModule } from '@ngxs/store';
 import { TodoState } from './store/todo.state';
+import { TagInputComponent } from './components/tag-input/tag-input.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,7 @@ import { TodoState } from './store/todo.state';
     TodoItemComponent,
     TodoListComponent,
     AddDialogComponent,
+    TagInputComponent,
   ],
   imports: [
     NgxsModule.forRoot([TodoState]),
@@ -40,6 +44,8 @@ import { TodoState } from './store/todo.state';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatMenuModule,
+    MatChipsModule,
+    MatAutocompleteModule,
   ],
   bootstrap: [AppComponent],
 })
