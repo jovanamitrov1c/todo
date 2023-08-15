@@ -6,7 +6,7 @@ import { AddDialogComponent } from 'src/app/components/add-dialog/add-dialog.com
 import { Todo } from 'src/app/models/todo.model';
 import { AddTodo } from 'src/app/store/todo.actions';
 import { TodoState } from 'src/app/store/todo.state';
-import { getDialogConfig } from 'src/app/util/dialog-config';
+import { getDialogConfig } from 'src/app/functions/dialog-config';
 
 @Component({
   selector: 'app-todo-page',
