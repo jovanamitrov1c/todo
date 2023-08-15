@@ -5,3 +5,9 @@ export class AddTag {
 
   constructor(public tag: Tag) {}
 }
+
+export class DeleteTag {
+  static readonly type = '[Tag] Delete';
+
+  constructor(public tag: Tag) {}
+}

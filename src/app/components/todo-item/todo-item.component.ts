@@ -6,6 +6,7 @@ import { DeleteTodo, ToggleDone, UpdateTodo } from 'src/app/store/todo.actions';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 import { Subject, filter, takeUntil } from 'rxjs';
 import { getDialogConfig } from 'src/app/functions/dialog-config';
+import { DeleteTag } from 'src/app/store/tag.actions';
 
 @Component({
   selector: 'app-todo-item',
@@ -28,6 +29,10 @@ export class TodoItemComponent implements OnDestroy {
   }
 
   delete(id: string) {
+    if (this.todo.tags.length) {
+      this.todo.tags.forEach((tag) => this.store.dispatch(new DeleteTag(tag)));
+    }
+
     this.store.dispatch(new DeleteTodo(id));
   }
 
