@@ -9,6 +9,7 @@
     <mat-form-field class="w-100">
       <mat-label>Title</mat-label>
       <input
+        #tagInput
         matInput
         formControlName="title"
         placeholder="Type in title..."
@@ -16,11 +17,11 @@
         required="required"
       />
     </mat-form-field>
-
     <mat-form-field class="w-100 description-field">
       <mat-label>Description</mat-label>
       <textarea matInput formControlName="description"></textarea>
     </mat-form-field>
+    <app-tag-input [selectedTags]="currentTodo.tags"></app-tag-input>
   </mat-dialog-content>
   <mat-dialog-actions>
     <div class="d-flex justify-content-end w-100 px-3 py-2">

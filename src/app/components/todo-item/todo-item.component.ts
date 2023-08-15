@@ -5,7 +5,7 @@ import { Todo } from 'src/app/models/todo.model';
 import { DeleteTodo, ToggleDone, UpdateTodo } from 'src/app/store/todo.actions';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 import { Subject, filter, takeUntil } from 'rxjs';
-import { getDialogConfig } from 'src/app/util/dialog-config';
+import { getDialogConfig } from 'src/app/functions/dialog-config';
 
 @Component({
   selector: 'app-todo-item',

@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Subject, takeUntil } from 'rxjs';
 import { Todo } from 'src/app/models/todo.model';
-import { getId } from 'src/app/util/id-generator';
+import { getId } from 'src/app/functions/id-generator';
 
 @Component({
   selector: 'app-add-dialog',
