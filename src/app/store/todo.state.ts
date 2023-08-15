@@ -49,7 +49,7 @@ export class TodoState {
 
   @Action(ToggleDone)
   public toggleDone(
-    { patchState, getState }: StateContext<TodoStateModel>,
+    { getState }: StateContext<TodoStateModel>,
     { id }: ToggleDone
   ) {
     const { currentTodos } = getState();

@@ -21,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxsModule } from '@ngxs/store';
 import { TodoState } from './store/todo.state';
 import { TagInputComponent } from './components/tag-input/tag-input.component';
+import { TagState } from './store/tag.state';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { TagInputComponent } from './components/tag-input/tag-input.component';
     TagInputComponent,
   ],
   imports: [
-    NgxsModule.forRoot([TodoState]),
+    NgxsModule.forRoot([TodoState, TagState]),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
