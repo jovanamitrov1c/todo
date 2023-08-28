@@ -12,6 +12,11 @@
       </div>
     </mat-checkbox>
     <span class="px-3 d-inline-block">{{ todo.description }}</span>
+    <div class="d-flex flex-wrap">
+      <div class="chips" *ngFor="let tag of todo.tags">
+        <mat-chip-row>{{ tag.label }}</mat-chip-row>
+      </div>
+    </div>
   </div>
 
   <button mat-icon-button [matMenuTriggerFor]="menu">

@@ -1,6 +1,7 @@
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { AddTag, DeleteTag } from './tag.actions';
 import { Tag } from '../models/tag.model';
+import { Injectable } from '@angular/core';
 
 interface TagStateModel {
   tags: Tag[];
@@ -10,6 +11,7 @@ interface TagStateModel {
   name: 'tag',
   defaults: { tags: [] },
 })
+@Injectable()
 export class TagState {
   @Action(AddTag)
   public addTag({ getState }: StateContext<TagStateModel>, { tag }: AddTag) {

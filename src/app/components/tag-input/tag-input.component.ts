@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Tag } from 'src/app/models/tag.model';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { Observable, combineLatest, filter, map } from 'rxjs';
+import { Observable, combineLatest, map } from 'rxjs';
 import { TagState } from 'src/app/store/tag.state';
 import { Select, Store } from '@ngxs/store';
 import { AddTag, DeleteTag } from 'src/app/store/tag.actions';

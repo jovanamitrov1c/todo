@@ -1,2 +1,4 @@
-export const getId = (): string =>
-  (Math.random() + 1).toString(36).substring(2);
+export const getId = (): string => {
+  const date = new Date();
+  return date.toISOString();
+};

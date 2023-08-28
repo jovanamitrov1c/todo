@@ -13,7 +13,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddDialogComponent } from './components/add-dialog/add-dialog.component';
 import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import {
+  MatFormFieldModule,
+  MAT_FORM_FIELD_DEFAULT_OPTIONS,
+} from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
@@ -22,6 +25,8 @@ import { NgxsModule } from '@ngxs/store';
 import { TodoState } from './store/todo.state';
 import { TagInputComponent } from './components/tag-input/tag-input.component';
 import { TagState } from './store/tag.state';
+import { FilterFieldsComponent } from './components/filter-fields/filter-fields.component';
+import { FilterState } from './store/filter.state';
 
 @NgModule({
   declarations: [
@@ -31,9 +36,10 @@ import { TagState } from './store/tag.state';
     TodoListComponent,
     AddDialogComponent,
     TagInputComponent,
+    FilterFieldsComponent,
   ],
   imports: [
-    NgxsModule.forRoot([TodoState, TagState]),
+    NgxsModule.forRoot([TodoState, TagState, FilterState]),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -47,6 +53,12 @@ import { TagState } from './store/tag.state';
     MatMenuModule,
     MatChipsModule,
     MatAutocompleteModule,
+  ],
+  providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'outline' },
+    },
   ],
   bootstrap: [AppComponent],
 })
