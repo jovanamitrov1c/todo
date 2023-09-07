@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Todo } from 'src/app/models/todo.model';
 
 @Component({
@@ -8,7 +7,7 @@ import { Todo } from 'src/app/models/todo.model';
   styleUrls: ['./todo-list.component.scss'],
 })
 export class TodoListComponent {
-  @Input() todos$: Observable<Todo[]>;
+  @Input() todos: Todo[] = [];
 
   isOpened = false;
 }

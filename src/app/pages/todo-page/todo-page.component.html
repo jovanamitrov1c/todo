@@ -1,8 +1,13 @@
-<div class="container">
-  <app-filter-fields></app-filter-fields>
-  <app-todo-list [todos$]="todos$"></app-todo-list>
-  <button mat-flat-button color="primary" (click)="openModal()">
-    <span>Add new</span>
-    <mat-icon>add</mat-icon>
-  </button>
+<div class="page pt-4">
+  <div class="container">
+    <app-filter-fields *ngIf="todos$ | async"></app-filter-fields>
+    <div class="d-flex justify-content-between mt-5">
+      <h1>All todos</h1>
+      <button mat-flat-button color="primary" (click)="openModal()">
+        <span>Add new</span>
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <app-todo-list [todos]="todos$ | async"></app-todo-list>
+  </div>
 </div>

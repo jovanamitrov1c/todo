@@ -17,10 +17,12 @@ import {
   MatFormFieldModule,
   MAT_FORM_FIELD_DEFAULT_OPTIONS,
 } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { NgxsModule } from '@ngxs/store';
 import { TodoState } from './store/todo.state';
 import { TagInputComponent } from './components/tag-input/tag-input.component';
@@ -53,6 +55,8 @@ import { FilterState } from './store/filter.state';
     MatMenuModule,
     MatChipsModule,
     MatAutocompleteModule,
+    MatExpansionModule,
+    MatCardModule,
   ],
   providers: [
     {

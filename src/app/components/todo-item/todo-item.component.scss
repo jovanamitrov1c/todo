@@ -1,16 +1,11 @@
-.todo-item {
-  border: solid 2px #f7f7f7;
-}
-
 .todo-title {
   font-size: 1.2rem;
-
-  &.todo-done {
-    color: #9a9a9a;
-    text-decoration: line-through;
-  }
 }
 
 .chips {
   margin: 0 0 0.5rem 0.5rem;
+}
+
+.content {
+  padding-left: 29px;
 }

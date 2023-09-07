@@ -1,28 +1,38 @@
-<div class="d-flex justify-content-between align-items-center todo-item">
-  <div class="d-flex flex-column">
-    <mat-checkbox
-      color="primary"
-      [checked]="todo.isDone"
-      (change)="toggleDone(todo.id)"
-    >
-      <div class="d-flex flex-column pl-2">
-        <span class="m-0 todo-title" [ngClass]="{ 'todo-done': todo.isDone }">{{
-          todo.title
-        }}</span>
+<mat-card>
+  <mat-card-content>
+    <div class="d-flex justify-content-between align-items-center todo-item">
+      <div class="d-flex flex-column">
+        <mat-checkbox
+          color="primary"
+          [checked]="todo.isDone"
+          (change)="toggleDone(todo.id)"
+        >
+          <div class="d-flex flex-column pl-2">
+            <span
+              class="m-0 todo-title"
+              [ngClass]="{ 'todo-done': todo.isDone }"
+              >{{ todo.title }}</span
+            >
+          </div>
+        </mat-checkbox>
+        <div class="content">
+          <span *ngIf="todo.description" class="px-3 d-inline-block">{{
+            todo.description
+          }}</span>
+          <div *ngIf="!!todo.tags.length" class="d-flex flex-wrap mt-2">
+            <div class="chips" *ngFor="let tag of todo.tags">
+              <mat-chip-row color="primary">{{ tag.label }}</mat-chip-row>
+            </div>
+          </div>
+        </div>
       </div>
-    </mat-checkbox>
-    <span class="px-3 d-inline-block">{{ todo.description }}</span>
-    <div class="d-flex flex-wrap">
-      <div class="chips" *ngFor="let tag of todo.tags">
-        <mat-chip-row>{{ tag.label }}</mat-chip-row>
-      </div>
-    </div>
-  </div>
 
-  <button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon>more_vert</mat-icon>
-  </button>
-</div>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>
 <mat-menu #menu="matMenu">
   <button mat-menu-item (click)="delete(todo.id)">Delete</button>
   <button mat-menu-item (click)="edit(todo)">Edit</button>

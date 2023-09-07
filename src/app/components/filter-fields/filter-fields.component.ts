@@ -30,6 +30,8 @@ export class FilterFieldsComponent {
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
 
+  panelOpenState = false;
+
   tagFilterControl: FormControl;
   titleFilterControl: FormControl;
   isDoneFilterControl: FormControl;
